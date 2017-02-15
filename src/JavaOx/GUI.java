@@ -12,7 +12,6 @@ import javax.sound.midi.MidiDevice;
 import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;

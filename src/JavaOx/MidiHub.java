@@ -25,6 +25,7 @@ public class MidiHub {
     private MidiUnit[] outputs; // all output devices and their status settings
     private OffReceiver offReceiver = new OffReceiver();
     private OnReceiver onReceiver; // is initialized later
+    private Receiver dumpReceiver = new DumpReceiver(System.out);
     
     /**
      * Default constructor. If used, must call setDevices later.
@@ -215,10 +216,13 @@ public class MidiHub {
       public OnReceiver() {
          // do nothing
       }
-       
+
       @Override
       public void send(MidiMessage message, long timeStamp) {
-         for (int i=0; i<outputs.length; i++) {
+          if (dumpReceiver != null) {
+              dumpReceiver.send(message, timeStamp);
+          }
+          for (int i=0; i<outputs.length; i++) {
              if (outputs[i].status) {
                 try {
                     outputs[i].device.getReceiver().send(message, timeStamp);
